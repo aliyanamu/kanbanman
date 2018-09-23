@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :style="{backgroundColor: this.color}">
     <div class="col m4" v-if="this.throwData">
       <header :style="{backgroundColor: this.color}">
         <strong style="color: white"> {{this.throwData.name}} </strong>
@@ -113,13 +113,20 @@ export default {
 
 section {
   width: 100%;
-  margin: 0 20px;
+  padding: 0 20px;
 }
 
 section header {
   padding: 10px 0;
   font-size: large;
-  border-radius: 20px 0;
+}
+.card-content, .card-action {
+  border-radius: 20px;
+  background: none;
+}
+
+.card {
+  background: #ffffff6e
 }
 
 .card-content p {
@@ -140,5 +147,19 @@ section header {
 
 .fa-star {
   color: darkviolet;
+}
+
+.card-action a {
+  cursor: pointer;
+  color: dimgrey!important;
+}
+
+.card-action a:hover {
+  cursor: pointer;
+  color: black!important;
+}
+
+.m4 {
+  margin-top: 30px;
 }
 </style>

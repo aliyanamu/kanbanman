@@ -7,7 +7,7 @@
         <div class="form">
           <div class="md-form">
             <label for="title"><i class="fa fa-tag"></i>Task name</label>
-            <input v-model="title" type="text" id="title" class="form-control" placeholder="e.g. create kanban">
+            <input v-model="title" type="text" id="title" class="form-control" placeholder="e.g. create kanban" required>
           </div>
           <div class="md-form">
             <label for="person"><i class="fas fa-user-tag"></i>Assign to</label>
@@ -19,7 +19,7 @@
           </div>
         </div>
         <button class="add-btn" @click="addTask">Confirm Task</button>
-        <button class="x-close" @click="closebtn">Cancel</button>
+        <button class="x-close" @click="closebtn">Close</button>
       </div>
     </div>
   </div>
@@ -46,16 +46,23 @@ export default {
     },
     closebtn () {
       this.isOpen = false
+      this.title = null
+      this.point = null
+      this.who = null
     },
     addTask () {
-      console.log(db.ref())
-      db.ref('tasks/backlog').once('value', (snapshot) => {
-        db.ref('tasks/backlog/items').push({
-          title: this.title,
-          point: this.point,
-          who: this.who
+      if (this.title.length > 0) {
+        if (this.point.length <= 0) this.point = '0'
+        if (this.who.length <= 0) this.point = 'anonymous'
+
+        db.ref('tasks/backlog').once('value', (snapshot) => {
+          db.ref('tasks/backlog/items').push({
+            title: this.title,
+            point: this.point,
+            who: this.who
+          })
         })
-      })
+      }
       this.title = null
       this.point = null
       this.who = null
@@ -82,14 +89,14 @@ export default {
 .addBox {
   position: fixed;
   color: #000;
-  background: white;
+  background: #ffffffcc;
   top: 15%;
   left: 35%;
   min-width: 31rem;
   padding: 3rem;
   transition: box-shadow 0.25s;
   z-index: 10000000;
-  border-radius: 20px 0;
+  border-radius: 20px;
 }
 
 .plus-btn {
@@ -98,12 +105,17 @@ export default {
   height: 50px;
   border-radius: 50%;
   position: fixed;
-  top: 3%;
-  right: 5%;
+  bottom: 5%;
+  right: 3%;
   background: orange;
   color: white;
   font-size: 30px;
   font-weight: bold;
+}
+
+.plus-btn:hover {
+  transform: scale(1.5);
+  transition: all .2s linear 0.2s
 }
 
 .md-form {
@@ -135,7 +147,7 @@ export default {
   font-size: 20px;
   font-weight: bold;
   color: #fffccc;
-  border-radius: 20px 0;
+  border-radius: 20px;
 }
 
 .x-close:hover,
@@ -155,5 +167,9 @@ input[type=text]:focus:not([readonly]) {
 
 .fa-tag {
   color: cadetblue;
+}
+
+label, ::placeholder {
+  color: dimgray;
 }
 </style>

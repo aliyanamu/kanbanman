@@ -66,7 +66,7 @@ body {
 }
 
 .column-wrap {
-  margin: 5% 5% 0;
+  min-height: 120vh;
   display: flex;
   flex-direction: row;
 }
