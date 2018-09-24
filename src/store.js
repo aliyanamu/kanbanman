@@ -43,19 +43,16 @@ export default new Vuex.Store({
     getTodos (context) {
       db.ref('tasks/todo').on('value', (snapshot) => {
         context.commit('setTodos', snapshot.val())
-        console.log('get todos', snapshot.val())
       })
     },
     getDoings (context) {
       db.ref('tasks/doing').on('value', (snapshot) => {
         context.commit('setDoings', snapshot.val())
-        console.log('get doings', snapshot.val())
       })
     },
     getDones (context) {
       db.ref('tasks/done').on('value', (snapshot) => {
         context.commit('setDones', snapshot.val())
-        console.log('get dones', snapshot.val())
       })
     }
   }

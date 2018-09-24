@@ -62,7 +62,7 @@ export default {
   methods: {
     prev (data) {
       if (this.throwData.name === 'Backlog') {
-        console.log('can not revert from backlog')
+        // console.log('can not revert from backlog')
       } else if (this.throwData.name === 'Todo') {
         db.ref('tasks/backlog/items').push({ title: data.title, point: data.point, who: data.who })
         db.ref(`tasks/todo/items/${data.id}`).remove()
@@ -96,7 +96,7 @@ export default {
         db.ref('tasks/done/items').push({ title: data.title, point: data.point, who: data.who })
         db.ref(`tasks/doing/items/${data.id}`).remove()
       } else if (this.throwData.name === 'Done') {
-        console.log('can not forward from done')
+        // console.log('can not forward from done')
       }
     }
   },
