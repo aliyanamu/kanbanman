@@ -1,5 +1,6 @@
 # kanbanman
 simple tools to manage your team tasks
+[https://kanbanman-cccd8.firebaseapp.com/](https://kanbanman-cccd8.firebaseapp.com/) 
 
 ## Project setup
 ```
